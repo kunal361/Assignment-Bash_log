@@ -1,21 +1,3 @@
 #!/bin/bash
-max_time=0
-max_req=""
-curr_time=0
-while IFS='' read -r request; do
-  if [ "$request" != "--" ]; then
-    IFS='' read -r response
-    num=`echo $response|wc -w`
-    if [ $num == 13 ]; then
-      curr_time="`echo $response|cut -d ' ' -f5|sed 's/[^0-9]//g'`"
-    else
-      curr_time="`echo $response|cut -d ' ' -f7|sed 's/[^0-9]//g'`"
-    fi
-    if [ $curr_time -gt $max_time ]; then
-      max_time=$curr_time
-      max_req=$request
-    fi
-  fi
-done
-echo "Max time: ${max_time}ms"
-echo "Request: $max_req"
+echo "max_time : request"
+echo `grep ':' tmp_more_than_50|awk '{l=$0;getline;print l " " $0;}'|cut -d\( -f1|awk '{printf "%s : ",$NF;{for(f=1;f<NF-4;f++)printf "%s\t",$f;printf "\n"}}'|sort -nr|sed q`
