@@ -4,4 +4,4 @@
 `chmod +x parse_log.sh`
 
 2) Run it as:<br>
-`./parse_log.s`
+`./parse_log.sh`
